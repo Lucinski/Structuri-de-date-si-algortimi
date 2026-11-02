@@ -1,0 +1,63 @@
+//Problema 1
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+
+        for (char c : s) {
+            if (c == '(' || c == '[' || c == '{') {
+                st.push(c);
+            } else {
+                if (st.empty()) return false;
+
+                char top = st.top();
+                st.pop();
+
+                if ((c == ')' && top != '(') ||
+                    (c == ']' && top != '[') ||
+                    (c == '}' && top != '{')) {
+                    return false;
+                }
+            }
+        }
+
+        return st.empty();
+    }
+};
+
+
+//Problema 2
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* a = headA;
+        ListNode* b = headB;
+
+        while (a != b) {
+            a = (a == nullptr) ? headB : a->next;
+            b = (b == nullptr) ? headA : b->next;
+        }
+
+        return a;
+    }
+};
+
+
+
+//Problema 3
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+
+        while (curr != nullptr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+};
